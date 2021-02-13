@@ -1,2 +1,5 @@
-# stage_medecine
-Project to manage the stage from medecine students
+# stage_medecine_api
+Back-End of the project Stage Medecine that has following objectives :
+- Easily handle traineeship for each students
+- Create predictions of traineeship distribution and points for each of them
+- Track history of each traineeship for each student and points of each students
