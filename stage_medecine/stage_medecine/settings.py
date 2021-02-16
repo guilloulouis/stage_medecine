@@ -9,9 +9,9 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+from django.core.management.utils import get_random_secret_key
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -19,12 +19,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '58grhshqa3mi+7o@0dl#&ii9mrhk*qzb2m%+c5wsbt%&rn$=*9'
-
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', default=get_random_secret_key())
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -36,6 +35,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django_probes',
+    'users',
+    'stages',
 ]
 
 MIDDLEWARE = [
@@ -77,7 +79,7 @@ DATABASES = {
         'NAME': "stage_medecine",
         'USER': "django",
         'PASSWORD': "djangostagemedecine#2021",
-        'HOST': '127.0.0.1',
+        'HOST': 'db',
         'PORT': '5432',
     }
 }
@@ -117,7 +119,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
@@ -125,3 +130,5 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
+
+DJANGO_SUPERUSER_PASSWORD="admin"
