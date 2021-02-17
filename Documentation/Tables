@@ -1,0 +1,40 @@
+---USERS---
+
+Promotion :
+- Nom
+
+Student : (liste de categories obligatoire + avoir fait soin pal ou pas) (potentiel d'import d'eleves a partir d'un csv)
+- Nom
+- Adresse mail
+- code (qui peut bouger)
+- promotion
+- liste de stage deja fait
+- nombre de points (peut etre calculé à partir des stages deja fait)
+- categories_valides (calculé a partir des stages fait)
+
+Admin :
+- User + staff
+
+----STAGES----
+
+Stages : (FIXE) (ajouter soin pal)
+- Nom
+- Obligatoire (bool)
+- nombre de place (min et max)
+- a garde (bool)
+- Ville
+- Hopital
+- Categorie
+__str__ (nom + ville + hopital (si il y a))
+
+
+Stage effectué :
+- Date
+- Nombre de point
+
+
+Periode de stage :
+- date
+
+Categorie de stage:
+- nom

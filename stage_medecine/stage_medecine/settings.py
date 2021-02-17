@@ -36,8 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'django_probes',
-    'users',
-    'stages',
+    'users.apps.UsersConfig',
+    'stages.apps.StagesConfig',
 ]
 
 MIDDLEWARE = [
@@ -130,5 +130,3 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
-
-DJANGO_SUPERUSER_PASSWORD="admin"

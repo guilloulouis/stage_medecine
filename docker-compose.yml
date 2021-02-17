@@ -10,7 +10,6 @@ services:
   web:
     build: .
     command: sh -c "python stage_medecine/manage.py wait_for_database &&
-             python stage_medecine/manage.py makemigrations &&
              python stage_medecine/manage.py migrate &&
              python stage_medecine/manage.py collectstatic --noinput &&
              python stage_medecine/manage.py create_superuser_with_password --username superadmin --password admin --noinput --email 'blank@email.com' --preserve &&
