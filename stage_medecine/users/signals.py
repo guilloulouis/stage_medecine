@@ -11,8 +11,3 @@ def stage_added_to_student(sender, **kwargs):
 def create_user_student(sender, instance, created, **kwargs):
     if created:
         Student.objects.create(user=instance)
-
-
-def save_user_student(sender, instance, **kwargs):
-    instance.student.save()
-
