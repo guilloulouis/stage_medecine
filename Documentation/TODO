@@ -1,3 +1,1 @@
 hooks
-jwt
-Change connect code to automaticaly change user password to be able to use jwt
