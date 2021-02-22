@@ -1,3 +1,4 @@
+from django.contrib.auth.backends import BaseBackend
 from django.db import models
 from django.contrib.auth.models import AbstractUser, User
 import string
@@ -14,25 +15,9 @@ class Class(models.Model):
     name = models.CharField(max_length=50, default="New Promotion")
 
 
-class ConnectCode(models.Model):
-    """Class representing the access code that students will use to authenticate to the server
-    :param unique_id: id that is generated randomly following the pattern [Letter-Letter-Number-Number-Letter-Letter]
-    """
-    unique_id = models.SlugField(primary_key=True, unique=True, editable=False, blank=True)
-
-    def save(self, *args, **kwargs):
-        while not self.unique_id:
-            new_id = ''.join(random.sample(string.ascii_letters, 2) + random.sample(string.digits, 2) + random.sample(string.ascii_letters, 2))
-            if not ConnectCode.objects.filter(pk=new_id).exists():
-                self.unique_id = new_id
-
-        super().save(*args, **kwargs)
-
-
 class Student(models.Model):
     """Class representing each student
     :param user: key to the user to link with the student
-    :param code: key to the code that will be generated for the student to log in when choosing a stage
     :param promotion: key to the promotion that is linked to the student
     :param stages_done: list of all the stages that have been done by the student
     :param stage_points: calculated points of the student
@@ -40,9 +25,8 @@ class Student(models.Model):
     :param ranking: rank of the student in his promotion to choose the next stage
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    code = models.ForeignKey(ConnectCode, on_delete=models.CASCADE, null=True)
-    promotion = models.ForeignKey(Class, on_delete=models.PROTECT, null=True)
-    stages_done = models.ManyToManyField(StageDone)
+    promotion = models.ForeignKey(Class, on_delete=models.PROTECT, null=True, blank=True)
+    stages_done = models.ManyToManyField(StageDone, blank=True)
     stage_points = models.FloatField(default=0.0)
 
     @property

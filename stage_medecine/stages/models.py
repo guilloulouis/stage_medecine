@@ -15,8 +15,13 @@ class Period(models.Model):
 class Category(models.Model):
     """Class representing each stage categories
     :param name: name of the stage (of service often times)
+    :param mandatory: true if a student must do a stage in this category to validate his clerkship
     """
     name = models.CharField(max_length=30)
+    mandatory = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name + ' - ' + "Obligatoire" if self.mandatory else self.name + ' - ' + "Optionnel"
 
 
 class Stage(models.Model):
@@ -25,8 +30,6 @@ class Stage(models.Model):
     :param place_min: number of minimum places for each stage
     :param place_max: number of maximum places for each stage
     :param guard: boolean indicating if you can take guards during the stage
-    :param town: town location of the stage
-    :param hospital: hospital of the stage
     :param category: Key indicating if the stage fills a mandatory category and if so, which one
     """
 
@@ -34,12 +37,10 @@ class Stage(models.Model):
     place_min = models.IntegerField(default=0)
     place_max = models.IntegerField(default=0)
     guard = models.BooleanField(default=False)
-    town = models.CharField(max_length=100, default="Caen")
-    hospital = models.CharField(max_length=100, default="CHU")
     category = models.ForeignKey(Category, on_delete=models.PROTECT, null=True)
 
     def __str__(self):
-        return self.name + ' (' + self.town + ' - ' + self.hospital + ')'
+        return self.name + ' (' + str(self.category) + ')'
 
 
 class StageDone(models.Model):

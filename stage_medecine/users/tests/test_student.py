@@ -1,30 +1,21 @@
 from django.contrib.auth.models import User
 
 from stages.models import Stage, StageDone, Category
-from users.models import Student, ConnectCode, Class
-from django.test import TestCase
+from users.models import Student
+from django.test import TestCase, Client
 
 
 class StudentTestCase(TestCase):
     def setUp(self):
         user_test = User.objects.create_user(username="test1", email='test@test.com', password='test')
         User.objects.create_user(username="test2", email='test@test.com', password='test')
-        connectcode_test = ConnectCode.objects.create()
         student = Student.objects.get(user=user_test)
-        student.code = connectcode_test
-        student.save()
 
     def test_student_user_exist(self):
         """Check if the user of the student exists"""
         user = User.objects.get(username="test1")
         student = Student.objects.get(user=user)
         self.assertEqual(student.user.username, user.username)
-
-    def test_student_no_connect_code(self):
-        """Check if the user with no code is not generated just like intended"""
-        user = User.objects.get(username="test2")
-        student = Student.objects.get(user=user)
-        self.assertEqual(student.code, None)
 
     def test_student_stage_points_initialized(self):
         """Check if the user has 0 stage points"""

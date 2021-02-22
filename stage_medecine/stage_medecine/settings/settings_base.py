@@ -40,6 +40,10 @@ INSTALLED_APPS = [
     'stages.apps.StagesConfig',
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -128,9 +132,18 @@ REST_FRAMEWORK = {
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
 }
 
+EMAIL_HOST = "ssl0.ovh.net"
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "admin@stages-medecine.fr"
+EMAIL_HOST_PASSWORD = "admin@webmail2021"
+
+print('End of base settings')
 try:
     from stage_medecine.settings.settings_docker import *
     print('Using docker env')

@@ -4,3 +4,5 @@ markdown
 django-filter
 psycopg2
 django-probes
+pandas
+djangorestframework_simplejwt

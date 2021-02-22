@@ -7,7 +7,7 @@ class StageTestCase(TestCase):
         Stage.objects.create(name="Cardio")
 
     def test_class_name(self):
-        """Class are correctly named"""
+        """Stage are correctly named"""
         class1 = Stage.objects.get(name="Cardio")
         self.assertEqual(class1.name, 'Cardio')
-        self.assertEqual(str(class1), "Cardio (Caen - CHU)")
+        self.assertEqual(str(class1), "Cardio (None)")
