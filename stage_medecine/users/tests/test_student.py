@@ -8,8 +8,9 @@ from django.test import TestCase, Client
 class StudentTestCase(TestCase):
     def setUp(self):
         user_test = User.objects.create_user(username="test1", email='test@test.com', password='test')
-        User.objects.create_user(username="test2", email='test@test.com', password='test')
-        student = Student.objects.get(user=user_test)
+        user_test2 = User.objects.create_user(username="test2", email='test@test.com', password='test')
+        student = Student.objects.create(user=user_test)
+        student = Student.objects.create(user=user_test2)
 
     def test_student_user_exist(self):
         """Check if the user of the student exists"""

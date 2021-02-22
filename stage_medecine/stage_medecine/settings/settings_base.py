@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django_probes',
     'users.apps.UsersConfig',
     'stages.apps.StagesConfig',
+    'procedures.apps.ProcedureConfig',
 ]
 
 AUTHENTICATION_BACKENDS = [

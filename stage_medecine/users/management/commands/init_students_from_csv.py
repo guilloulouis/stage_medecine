@@ -14,7 +14,7 @@ def prepare_mail(password, user):
         'Your credentials are :\n'
         '-username : ' + user.username +
         '\n-password : ' + password +
-        "\nIf you can't connect now that might be normal until a procedure starts",
+        "\nIf you can't connect now that might be normal until a procedures starts",
         'admin@stages-medecine.fr',
         [user.email],
     )

@@ -33,8 +33,26 @@ Stage effectué :
 - Nombre de point
 
 
-Periode de stage :
-- date
+--------PROCEDURE-----------
 
-Categorie de stage:
-- nom
+
+Stage effectué temporaire :
+- procedure_try
+- Stage
+- Points
+- List de Student
+
+
+Procedure :
+- Promotion
+
+Procedure_try:
+- Date
+- Procedure
+
+Stage wish :
+- Student
+- Stage
+- Importance
+- Want to do the mandatory stage (bool)
+- Procedure
