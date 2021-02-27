@@ -52,4 +52,4 @@ class StageDone(models.Model):
 
     stage = models.ForeignKey(Stage, on_delete=models.CASCADE)
     period = models.ForeignKey(Period, on_delete=models.CASCADE, null=True)
-    value = models.FloatField(default=0.0)
+    value = models.IntegerField(default=0)
