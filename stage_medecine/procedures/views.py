@@ -39,9 +39,10 @@ def simulation_apply(request, id_simulation):
         return Response({'error': 'simulation does not exist'}, status=status.HTTP_400_BAD_REQUEST)
 
 
-# @api_view(['GET'])
-# @permission_classes([IsAuthenticated, IsAdminUser])
-# def get_active_procedures(request):
-#     procedures = Procedure.objects.filter(active=True)
-#
-#     return Response({'error': 'simulation applied'}, status=status.HTTP_202_ACCEPTED)
+@api_view(['GET'])
+@permission_classes([IsAuthenticated, IsAdminUser])
+def get_active_procedures(request):
+    procedures = Procedure.objects.filter(active=True)
+    serializer = SnippetSerializer(snippets, many=True)
+    return JsonResponse(serializer.data, safe=False)
+    return Response({'error': 'simulation applied'}, status=status.HTTP_202_ACCEPTED)
