@@ -1,10 +1,12 @@
 # Create your views here.
+from django.http import JsonResponse
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from django.core.exceptions import ObjectDoesNotExist
 from procedures.models import Procedure, Simulation
+from procedures.serializer import ProcedureSerializer
 
 
 @api_view(['PUT'])
@@ -43,6 +45,5 @@ def simulation_apply(request, id_simulation):
 @permission_classes([IsAuthenticated, IsAdminUser])
 def get_active_procedures(request):
     procedures = Procedure.objects.filter(active=True)
-    serializer = SnippetSerializer(snippets, many=True)
-    return JsonResponse(serializer.data, safe=False)
-    return Response({'error': 'simulation applied'}, status=status.HTTP_202_ACCEPTED)
+    serializer = ProcedureSerializer(procedures, many=True)
+    return JsonResponse(serializer.data, safe=True)
