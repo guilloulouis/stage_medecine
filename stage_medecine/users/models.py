@@ -1,9 +1,5 @@
-from django.contrib.auth.backends import BaseBackend
 from django.db import models
 from django.contrib.auth.models import AbstractUser, User
-import string
-import random
-from django.db.models import Sum
 # Create your models here.
 from stages.models import StageDone
 

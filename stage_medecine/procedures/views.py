@@ -46,4 +46,4 @@ def simulation_apply(request, id_simulation):
 def get_active_procedures(request):
     procedures = Procedure.objects.filter(active=True)
     serializer = ProcedureSerializer(procedures, many=True)
-    return JsonResponse(serializer.data, safe=True)
+    return JsonResponse(serializer.data, safe=False)

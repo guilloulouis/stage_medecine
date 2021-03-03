@@ -17,5 +17,6 @@ from django.urls import path
 from procedures import views
 
 urlpatterns = [
+    path('', views.get_active_procedures, name='procedure_get'),
     path('compute/<int:id_procedure>', views.procedure_computation, name='procedure_compute'),
 ]
