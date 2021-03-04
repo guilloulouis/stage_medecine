@@ -16,5 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from stages import views
+
 urlpatterns = [
+    path('stages', views.get_stages, name='get_stages'),
+    path('stages_done', views.get_stages_done, name='get_stages_done'),
+    path('all_stages_done', views.get_all_stages_done, name='get_all_stages_done'),
 ]
