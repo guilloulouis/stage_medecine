@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'stages.apps.StagesConfig',
     'procedures.apps.ProcedureConfig',
+    'drf_spectacular',
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -137,6 +138,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 EMAIL_HOST = "ssl0.ovh.net"

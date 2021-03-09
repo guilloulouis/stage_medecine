@@ -43,3 +43,17 @@ jobs:
         run: |
           python stage_medecine/manage.py migrate
           python stage_medecine/manage.py test stage_medecine
+
+      - name: Generate the documentation
+        run: |
+          python stage_medecine/manage.py spectacular --file doc.yml
+
+      - name: Generate the html of the documentation
+        run: |
+          docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli generate -i /local/doc.yml -g html2 -o /local
+
+      - name: Archive HTML documentation
+        uses: actions/upload-artifact@v2
+        with:
+          name: swagger-html
+          path: index.html
