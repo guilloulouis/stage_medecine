@@ -3,6 +3,8 @@ front flutter : https://github.com/guilloulouis/stage_medecine_front
 
 front react : https://github.com/guilloulouis/stage_medecine_front_react
 
+web server (https nginx) : https://github.com/guilloulouis/web-server_stage-medecine
+
 Back-End of the project Stage Medecine that has following objectives :
 - Easily handle traineeship for each students
 - Create predictions of traineeship distribution and points for each of them
