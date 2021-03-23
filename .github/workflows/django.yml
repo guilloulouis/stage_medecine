@@ -39,8 +39,10 @@ jobs:
           python -m pip install -r app/requirements.txt
         if: steps.cache.outputs.cache-hit != 'true'
 
-      - name: Set prod env variable
-        run: echo ".env.prod" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+      - name: Environment Variables from Dotenv
+        uses: c-py/action-dotenv-to-setenv@v3
+        with:
+          env-file: .env.prod
 
       - name: Test
         run: |
