@@ -6,7 +6,7 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-
+    container: python:3.9
     services:
       db:
         image: postgres:11
@@ -14,7 +14,6 @@ jobs:
           POSTGRES_USER: django
           POSTGRES_PASSWORD: djangostagemedecine#2021
           POSTGRES_DB: stage_medecine_db
-          POSTGRES_HOST_AUTH_METHOD: trust
         ports: ['5432:5432']
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
@@ -23,10 +22,10 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Set up Python 3.9
-        uses: actions/setup-python@v1
-        with:
-          python-version: 3.9
+#      - name: Set up Python 3.9
+#        uses: actions/setup-python@v1
+#        with:
+#          python-version: 3.9
 
       - uses: actions/cache@v1
         with:
