@@ -54,9 +54,10 @@ jobs:
           python app/manage.py spectacular --file doc.yml
 
       - name: Generate the html of the documentation
-        run: |
-          apt update
-          apt install -y docker
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+        run:
           docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli generate -i /local/doc.yml -g html2 -o /local
 
       - name: Archive HTML documentation
