@@ -55,6 +55,8 @@ jobs:
 
       - name: Generate the html of the documentation
         run: |
+          apt update
+          apt install -y docker
           docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli generate -i /local/doc.yml -g html2 -o /local
 
       - name: Archive HTML documentation
