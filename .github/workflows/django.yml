@@ -56,7 +56,7 @@ jobs:
       - name: Generate the html of the documentation
         run: |
           curl -fsSL https://get.docker.com -o get-docker.sh
-          sudo sh get-docker.sh
+          sh get-docker.sh
           docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli generate -i /local/doc.yml -g html2 -o /local
 
       - name: Archive HTML documentation
