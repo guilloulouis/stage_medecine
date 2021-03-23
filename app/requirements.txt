@@ -2,8 +2,8 @@ django
 djangorestframework
 markdown
 django-filter
-psycopg2
+psycopg2-binary
 django-probes
-pandas
 djangorestframework_simplejwt
 drf-spectacular
+gunicorn==20.0.4

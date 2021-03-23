@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser, User
+from django.contrib.auth.models import User
 # Create your models here.
 from stages.models import StageDone
 
@@ -34,5 +34,5 @@ class Student(models.Model):
         student_promo = Student.objects.filter(promotion=self.promotion).order_by('stage_points')
         for index, item in enumerate(student_promo):
             if item.id == self.id:
-                return index+1
+                return index + 1
         return -1

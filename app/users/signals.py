@@ -1,5 +1,4 @@
 from django.db.models import Sum
-from users.models import Student
 
 
 def stage_added_to_student(sender, **kwargs):
