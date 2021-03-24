@@ -6,7 +6,7 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-    container: python:3.9
+
     services:
       db:
         image: postgres:11
@@ -22,10 +22,10 @@ jobs:
         with:
           fetch-depth: 1
 
-#      - name: Set up Python 3.9
-#        uses: actions/setup-python@v1
-#        with:
-#          python-version: 3.9
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
 
       - uses: actions/cache@v1
         with:
@@ -53,10 +53,10 @@ jobs:
         run: |
           python app/manage.py spectacular --file doc.yml
 
-      - name: Install docker engine
-        run: |
-          curl -fsSL https://get.docker.com -o get-docker.sh
-          sh get-docker.sh
+#      - name: Install docker engine
+#        run: |
+#          curl -fsSL https://get.docker.com -o get-docker.sh
+#          sh get-docker.sh
 
       - name: Generate the html of the documentation
         run: |
