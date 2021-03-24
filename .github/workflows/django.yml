@@ -52,6 +52,7 @@ jobs:
       - name: Generate the documentation
         run: |
           python app/manage.py spectacular --file doc.yml
+          ls -al
 
       - name: Install docker engine
         run: |
@@ -60,6 +61,8 @@ jobs:
 
       - name: Generate the html of the documentation
         run: |
+          echo ${PWD}
+          ls -al
           docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli generate -i /local/doc.yml -g html2 -o /local
 
       - name: Archive HTML documentation
