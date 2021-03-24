@@ -63,7 +63,7 @@ jobs:
         run: |
           echo ${PWD}
           ls -al
-          docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli generate -i /local/doc.yml -g html2 -o /local
+          docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli ls -al /local && generate -i /local/doc.yml -g html2 -o /local
 
       - name: Archive HTML documentation
         uses: actions/upload-artifact@v2
