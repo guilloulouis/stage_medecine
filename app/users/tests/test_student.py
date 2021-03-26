@@ -1,16 +1,15 @@
 from django.contrib.auth.models import User
-
 from stages.models import Stage, StageDone, Category
 from users.models import Student
-from django.test import TestCase, Client
+from django.test import TestCase
 
 
 class StudentTestCase(TestCase):
     def setUp(self):
         user_test = User.objects.create_user(username="test1", email='test@test.com', password='test')
         user_test2 = User.objects.create_user(username="test2", email='test@test.com', password='test')
-        student = Student.objects.create(user=user_test)
-        student = Student.objects.create(user=user_test2)
+        Student.objects.create(user=user_test)
+        Student.objects.create(user=user_test2)
 
     def test_student_user_exist(self):
         """Check if the user of the student exists"""

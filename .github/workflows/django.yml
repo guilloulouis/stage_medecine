@@ -13,7 +13,7 @@ jobs:
         env:
           POSTGRES_USER: django
           POSTGRES_PASSWORD: djangostagemedecine#2021
-          POSTGRES_DB: stage_medecine
+          POSTGRES_DB: stage_medecine_db
         ports: ['5432:5432']
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
@@ -36,10 +36,29 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install -r requirements.txt
+          python -m pip install -r app/requirements.txt
         if: steps.cache.outputs.cache-hit != 'true'
+
+      - name: Environment Variables from Dotenv
+        uses: c-py/action-dotenv-to-setenv@v3
+        with:
+          env-file: .env.github-ci
 
       - name: Test
         run: |
-          python stage_medecine/manage.py migrate
-          python stage_medecine/manage.py test stage_medecine
+          python app/manage.py migrate
+          python app/manage.py test stage_medecine
+
+      - name: Generate the documentation
+        run: |
+          python app/manage.py spectacular --file doc.yml
+
+      - name: Generate the html of the documentation
+        run: |
+          docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli generate -i /local/doc.yml -g html2 -o /local
+
+      - name: Archive HTML documentation
+        uses: actions/upload-artifact@v2
+        with:
+          name: swagger-html
+          path: index.html
