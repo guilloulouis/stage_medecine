@@ -47,3 +47,13 @@ def get_active_procedures(request):
     procedures = Procedure.objects.filter(active=True)
     serializer = ProcedureSerializer(procedures, many=True)
     return JsonResponse(serializer.data, safe=False)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated, IsAdminUser])
+def post_procedure(request):
+    serializer = ProcedureSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
