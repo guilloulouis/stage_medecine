@@ -144,4 +144,5 @@ EMAIL_PORT = int(os.environ.get("EMAIL_PORT", default=587))
 EMAIL_HOST = os.environ.get("EMAIL_HOST", "abc.com")
 EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "admin@admin.fr")
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "password")
-SECURE_PROXY_SSL_HEADER = os.environ.get("SSL_HEADER", default=())
+if os.environ.get("SSL_HEADER", default="false") == "true":
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
